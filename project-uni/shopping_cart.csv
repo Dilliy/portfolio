@@ -1,0 +1,20 @@
+ID,Kategory,Name,Price,Description
+0,Drinks,Cola,5,Sweet soda
+1,Drinks,Pepsi,5,Sweeter soda
+2,Drinks,Beer,10,Beloved
+3,Drinks,Fanta,6,Tastes like orange
+4,Drinks,RedBull,15,Essential
+5,Drinks,Monster,10,Essential x2
+6,Vegetables,Potato,2,Belarus
+7,Vegetables,Corn,3,Almost Korn
+8,Vegetables,Cucumber,2,Ew
+9,Vegetables,Onion,2,French noises
+10,Vegetables,Bean,6,British noises
+11,Meat,Pork,25,Haram
+12,Meat,Beef,30,80% lean
+13,Meat,Lamb,40,Vegan
+14,Fish,Tuna,40,Used to swim
+15,Fish,Salmon,25,Fish
+16,Fish,Anchovies,10,WHY
+17,Sweets,Milka,8,More sugar for the sugar throne
+18,Sweets,Kinder,14,Surprise
