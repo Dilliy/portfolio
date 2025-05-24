@@ -1,0 +1,16 @@
+OrderID,CustomerID,OrderDate,OrderType,TableNumber,PaymentType,EmployeeID
+1,11,5/3/2025,ToGo,T1,Cash,5
+2,4,5/4/2025,DineIn,T4,Card,2
+3,6,5/4/2025,ToGo,T1,Cash,5
+4,3,5/3/2025,DineIn,T1,Card,6
+5,2,5/4/2025,ToGo,T1,Check,7
+6,3,5/2/2025,ToGo,T1,Card,10
+7,8,5/3/2025,ToGo,T4,Card,6
+8,10,5/1/2025,DineIn,T1,Card,2
+9,1,5/3/2025,ToGo,T3,Cash,5
+10,4,5/2/2025,ToGo,T2,Card,6
+11,2,5/4/2025,DineIn,T2,Card,7
+12,6,5/2/2025,ToGo,T4,Check,10
+13,5,5/3/2025,DineIn,T3,Cash,10
+14,1,5/2/2025,DineIn,T4,Card,2
+15,12,5/4/2025,ToGo,T3,Cash,5
