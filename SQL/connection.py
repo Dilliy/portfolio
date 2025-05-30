@@ -1,8 +1,10 @@
+#LIBRARIES USED
 import psycopg2
 from config import HOST, USER, PASSWORD, PORT, db_name
 from psycopg2 import sql
 from psycopg2 import Error
 import csv
+
 try:
     #CONNECTION TO THE DATA BASE
     with psycopg2.connect (
@@ -11,6 +13,7 @@ try:
         password = PASSWORD,
         port = PORT
     ) as conn:
+        #AUTOCOMMIT ALLOW US TO COMMIT ANY CHANGES AUTOMATICALY
         conn.autocommit = True
         #CREATION OF CUSTOMERS TABLE WITH CUSTOMERID AS PRIMARY KEY
         with conn.cursor() as cur:
@@ -28,7 +31,6 @@ try:
                     CustomerPh = sql.Identifier('CustomerPhone'),
                     CustomerD = sql.Identifier('CustomerDOB')
                 ))
-                conn.commit()
 
             except Error as e:
                 conn.rollback()
@@ -53,7 +55,6 @@ try:
                                 ManagerID = sql.Identifier('ManagerID')
                             )
                 )
-                conn.commit()
             
             except Error as e:
                 conn.rollback()
@@ -74,10 +75,11 @@ try:
                                 Price = sql.Identifier('Price')
                             )
                 )
-                conn.commit()
+
             except Error as e:
                 conn.rollback()
                 print(f'Faile: {e}')
+
         #CREATION OF ORDER TABLE WITH ORDERID AS PRIMARY KEY
         with conn.cursor() as cur:
             try:
@@ -103,10 +105,11 @@ try:
                                 Customer_table = sql.Identifier('customers')
                             )
                 )
-                conn.commit()
+
             except Error as e:
                 conn.rollback()
                 print(f"Failed: {e}")
+
         #CREATION OF ORDERITEMS TABLE WITH ORDERITEMSID AS PRIMARY KEY
         with conn.cursor() as cur:
             try:
@@ -126,14 +129,16 @@ try:
                                 Menu_table = sql.Identifier('menu'),
                             )
                 )
-                conn.commit()
+
             except Error as e:
                 conn.rollback()
                 print(f"Filed: {e}")
+
         #INSERT DATA TO MENU TABLE
         try:
             with open('menu.csv', 'r') as f:
                 reader = csv.reader(f)
+                #NEXT CONSTRUCTION ALLOW US TO SKIP TITELS
                 next(reader)
                 with conn.cursor() as cur:
                     for row in reader:
@@ -153,7 +158,7 @@ try:
                         except Error as e:
                             conn.rollback()
                             print(f'CSV insert failed: {e}')
-                conn.commit()
+
                 print("Data was iserted to Menu table.")
         except:
             print("CSV file was not found.")
@@ -182,7 +187,7 @@ try:
                         except Error as e:
                             conn.rollback()
                             print(f'CSV insert failed: {e}')
-                conn.commit()
+
                 print("Data was iserted to Customer table.")
         except:
             print("CSV file was not found.")
@@ -213,7 +218,7 @@ try:
                         except Error as e:
                             conn.rollback()
                             print(f'CSV insert failed: {e}')
-                conn.commit()
+
                 print("Data was iserted to Employees table.")
         except:
             print("CSV file was not found.")
@@ -248,7 +253,7 @@ try:
                         except Error as e:
                             conn.rollback()
                             print(f'CSV insert failed: {e}')
-                conn.commit()
+
                 print("Data was iserted to Orders table.")
         except:
             print("CSV file was not found.")
@@ -277,7 +282,7 @@ try:
                         except Error as e:
                             conn.rollback()
                             print(f'CSV insert failed: {e}')
-                conn.commit()
+
                 print("Data was iserted to OrderItems table.")
         except:
             print("CSV file was not found.")
@@ -308,7 +313,7 @@ try:
                             )
                             SELECT DISTINCT
                             {temp}.{order_id},
-                            {temp}.{Date},
+                            to_char({temp}.{Date}, 'dd-mon-yyyy') as {date_str},
                             {temp}.{Type},
                             {temp}.{TableNum},
                             {temp}.{Payment},
@@ -337,7 +342,8 @@ try:
                 customers = sql.Identifier('customers'),
                 customer_name = sql.Identifier('CustomerName'),
                 employee = sql.Identifier('employees'),
-                employee_name = sql.Identifier('EmployeeName')
+                employee_name = sql.Identifier('EmployeeName'),
+                date_str = sql.Identifier('Date')
                 )
             cur.execute(query)
             while True:
